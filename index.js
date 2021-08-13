@@ -3,7 +3,7 @@ import { registerRootComponent } from 'expo';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux'
 import promiseMiddleware from 'redux-promise';
-import reducers from './store/reducers/index'
+import reducers from './src/store/reducers/index'
 import App from './src/App';
 import React from 'react';
 
