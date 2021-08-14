@@ -1,28 +1,34 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { connect } from 'react-redux';
 
-import Home from './components/home/Home'
 import Login from './components/auth/Login'
-import VideoScreen from './components/home/videos'
-import ArticleScreen from './components/home/articles'
+import Profile from './components/user/profile'
+
+import CustomDrawer from './utils/customDrawer';
 
 import { Stack, HomeStack, VideoStack } from './routes/stacks'
-// const Stack = createNativeStackNavigator();
+
 const Drawer = createDrawerNavigator()
 
 const MainDrawer = () => {
   return (
-      <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={HomeStack} />
-        <Drawer.Screen name="Video" component={VideoStack} />
-        <Drawer.Screen name="Article" component={ArticleScreen} />
-        {/* <Drawer.Screen name="Notifications" component={NotificationsScreen} /> */}
+      <Drawer.Navigator
+        drawerContent={(props) => <CustomDrawer {...props} />}
+        screenOptions={{
+          drawerStyle: {
+            backgroundColor: '#A9A9A9',
+            // overlayColor: 'transparent'
+          },
+        }}
+      >
+        <Drawer.Screen name="Home" component={HomeStack} options={{headerShown: false}}/>
+        <Drawer.Screen name="Video" component={VideoStack} options={{headerShown: false}}/>
+        <Drawer.Screen name="Profile" component={Profile} options={{headerShown: false}}/>
       </Drawer.Navigator>
   )
   
@@ -39,7 +45,7 @@ class App extends React.Component {
           { 
             this.props.auth.isAuth ?
             ///whole app
-             <Stack.Screen name="Main" component={MainDrawer} />
+             <Stack.Screen name="ShangzWire" component={MainDrawer} />
             :
             //login screen
             <Stack.Screen component={Login} name="Login" />
